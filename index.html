@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Example</title>
+    <script>
+        function showAlertPopup() {
+            alert("This is a simple alert popup!");
+        }
+
+        function showConfirmationPopup() {
+            const userConfirmed = confirm("Do you want to proceed?");
+            if (userConfirmed) {
+                alert("You chose to proceed!");
+            } else {
+                alert("You canceled the operation.");
+            }
+        }
+
+        function showPromptPopup() {
+            const userInput = prompt("Enter your name:", "Your Name");
+            if (userInput) {
+                alert("Hello, " + userInput + "!");
+            } else {
+                alert("No name entered.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Browser Popup Examples</h1>
+    <button onclick="showAlertPopup()">Show Alert Popup</button>
+    <button onclick="showConfirmationPopup()">Show Confirmation Popup</button>
+    <button onclick="showPromptPopup()">Show Prompt Popup</button>
+</body>
+</html>
