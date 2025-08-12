@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Digital Wardrobe</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">Digital Wardrobe</div>
+      <nav class="tabs" role="tablist" aria-label="Main Navigation">
+        <button class="tab active" data-tab="wardrobe" aria-selected="true">Wardrobe</button>
+        <button class="tab" data-tab="outfits" aria-selected="false">Outfits</button>
+        <button class="tab" data-tab="saved" aria-selected="false">Saved</button>
+        <button class="tab" data-tab="settings" aria-selected="false">Import/Export</button>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <aside class="sidebar">
+        <section class="panel">
+          <h3>Profile</h3>
+          <div class="segmented">
+            <button class="segment active" data-gender="men">Men</button>
+            <button class="segment" data-gender="women">Women</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Occasions</h3>
+          <div class="chips" id="occasion-chips">
+            <!-- populated by JS -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Color</h3>
+          <div class="color-picker">
+            <input type="color" id="color-input" value="#3b82f6" />
+            <input type="text" id="color-name" placeholder="e.g. Navy" />
+          </div>
+          <div class="combo-suggestions" id="combo-suggestions">
+            <!-- color combo suggestions -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Quick Add</h3>
+          <form id="add-item-form">
+            <div class="field">
+              <label>Category</label>
+              <select id="item-category" required>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="footwear">Footwear</option>
+                <option value="outerwear">Outerwear</option>
+                <option value="accessory">Accessory</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Subcategory</label>
+              <input id="item-subcategory" placeholder="e.g. T‑Shirt, Jeans" />
+            </div>
+            <div class="field">
+              <label>Occasions</label>
+              <select id="item-occasions" multiple>
+                <!-- populated by JS -->
+              </select>
+            </div>
+            <div class="field">
+              <label>Brand/Notes</label>
+              <input id="item-notes" placeholder="Optional" />
+            </div>
+            <div class="actions">
+              <button type="submit" class="primary">Add Item</button>
+            </div>
+          </form>
+        </section>
+      </aside>
+
+      <section class="content">
+        <section id="tab-wardrobe" class="tab-page active" aria-labelledby="Wardrobe">
+          <div class="toolbar">
+            <div class="filters">
+              <select id="filter-category">
+                <option value="all">All Categories</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="footwear">Footwear</option>
+                <option value="outerwear">Outerwear</option>
+                <option value="accessory">Accessory</option>
+              </select>
+              <select id="filter-occasion">
+                <option value="all">All Occasions</option>
+              </select>
+            </div>
+            <div class="search">
+              <input id="search-text" placeholder="Search items…" />
+            </div>
+          </div>
+          <div id="wardrobe-grid" class="grid">
+            <!-- items populate here -->
+          </div>
+        </section>
+
+        <section id="tab-outfits" class="tab-page" aria-labelledby="Outfits">
+          <div class="builder">
+            <div class="builder-row">
+              <div class="builder-col">
+                <h4>Top</h4>
+                <div class="builder-list" data-slot="top"></div>
+              </div>
+              <div class="builder-col">
+                <h4>Bottom</h4>
+                <div class="builder-list" data-slot="bottom"></div>
+              </div>
+              <div class="builder-col">
+                <h4>Footwear</h4>
+                <div class="builder-list" data-slot="footwear"></div>
+              </div>
+              <div class="builder-col">
+                <h4>Accessory</h4>
+                <div class="builder-list" data-slot="accessory"></div>
+              </div>
+            </div>
+            <div class="builder-actions">
+              <input id="outfit-name" placeholder="Outfit name" />
+              <button id="save-outfit" class="primary">Save Outfit</button>
+            </div>
+            <div class="outfit-saved" id="outfit-saved-list"></div>
+          </div>
+        </section>
+
+        <section id="tab-saved" class="tab-page" aria-labelledby="Saved">
+          <h3>Saved Items</h3>
+          <div id="saved-items" class="grid"></div>
+          <h3>Saved Outfits</h3>
+          <div id="saved-outfits" class="outfit-saved"></div>
+        </section>
+
+        <section id="tab-settings" class="tab-page" aria-labelledby="Import/Export">
+          <div class="panel">
+            <h3>Backup</h3>
+            <div class="actions">
+              <button id="export-data">Export JSON</button>
+              <label class="import-label">
+                <input type="file" id="import-file" accept="application/json" hidden />
+                <span class="button like">Import JSON</span>
+              </label>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Seed Sample Items</h3>
+            <button id="seed-samples">Add Sample Wardrobe</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="item-card-template">
+      <div class="card">
+        <div class="swatch" title="Color"></div>
+        <div class="meta">
+          <div class="title"></div>
+          <div class="subtitle"></div>
+          <div class="badges"></div>
+        </div>
+        <div class="card-actions">
+          <button class="save">❤</button>
+          <button class="delete">🗑</button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
