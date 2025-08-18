@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cybersecurity Symposium — Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="grid-overlay"></div>
+    <header class="container">
+      <div class="brand">
+        <div class="logo">🔐</div>
+        <div>
+          <h1>Cybersecurity Symposium 2025</h1>
+          <p class="subtitle">Defend. Detect. Respond.</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Register Now</h2>
+        <p class="lead">Secure your spot among industry leaders, researchers, and practitioners.</p>
+
+        <form id="registrationForm" novalidate>
+          <div class="form-row">
+            <label for="fullName">Full name<span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" placeholder="Alex Doe" required />
+            <small class="error" data-for="fullName"></small>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email<span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="alex@example.com" required />
+            <small class="error" data-for="email"></small>
+          </div>
+
+          <div class="form-row">
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="ACME Security Labs" />
+          </div>
+
+          <div class="form-row">
+            <label for="role">Role/Title</label>
+            <input type="text" id="role" name="role" placeholder="Security Engineer" />
+          </div>
+
+          <div class="form-row">
+            <label>Areas of interest</label>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="interests" value="Threat Intelligence" />Threat Intelligence</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Cloud Security" />Cloud Security</label>
+              <label class="chip"><input type="checkbox" name="interests" value="AppSec" />AppSec</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Blue Team" />Blue Team</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Red Team" />Red Team</label>
+              <label class="chip"><input type="checkbox" name="interests" value="AI Security" />AI Security</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="attendance">Attendance<span class="req">*</span></label>
+            <select id="attendance" name="attendance" required>
+              <option value="">Select…</option>
+              <option>In-person</option>
+              <option>Virtual</option>
+              <option>Hybrid</option>
+            </select>
+            <small class="error" data-for="attendance"></small>
+          </div>
+
+          <div class="form-row">
+            <label for="tshirtSize">T‑shirt size</label>
+            <select id="tshirtSize" name="tshirtSize">
+              <option value="">Prefer not to say</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+              <option>XXL</option>
+            </select>
+          </div>
+
+          <div class="form-row agree">
+            <label class="checkbox">
+              <input type="checkbox" id="agree" name="agree" required />
+              I agree to the event code of conduct and privacy policy
+            </label>
+            <small class="error" data-for="agree"></small>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary">Submit Registration</button>
+            <button type="reset" class="ghost">Reset</button>
+          </div>
+
+          <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <p>© 2025 Cybersecurity Symposium. All rights reserved.</p>
+    </footer>
+
+    <script src="/script.js" type="module"></script>
+  </body>
+  </html>
+
