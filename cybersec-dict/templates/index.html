@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-8 mx-auto">
+    <h1 class="mb-3">Cybersecurity Dictionary</h1>
+    <form class="input-group" action="{{ url_for('dict.list_terms') }}" method="get">
+      <input type="text" name="q" class="form-control" placeholder="Search for a term...">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <p class="text-muted mt-3">Browse hundreds of cybersecurity concepts, attacks, defenses, and standards.</p>
+  </div>
+</div>
+{% endblock %}

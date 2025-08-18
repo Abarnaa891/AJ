@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ entry.term }}</h2>
+{% if entry.category %}
+<p><span class="badge text-bg-secondary">{{ entry.category }}</span></p>
+{% endif %}
+<p style="white-space: pre-wrap;">{{ entry.content }}</p>
+
+{% if current_user.is_authenticated %}
+  {% if is_saved %}
+  <form method="post" action="{{ url_for('dict.unsave_entry', entry_id=entry.id) }}">
+    <button class="btn btn-outline-secondary" type="submit">Unsave</button>
+  </form>
+  {% else %}
+  <form method="post" action="{{ url_for('dict.save_entry', entry_id=entry.id) }}">
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+  {% endif %}
+{% else %}
+  <p class="text-muted">Login to save this word.</p>
+{% endif %}
+{% endblock %}

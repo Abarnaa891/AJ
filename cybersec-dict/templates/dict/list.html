@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dictionary</h2>
+<form class="row g-2 mb-3" method="get">
+  <div class="col-sm-6">
+    <input type="text" class="form-control" name="q" placeholder="Search terms or content" value="{{ q }}">
+  </div>
+  <div class="col-sm-4">
+    <select class="form-select" name="category">
+      <option value="">All categories</option>
+      {% for c in categories %}
+        <option value="{{ c }}" {% if c==category %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-sm-2">
+    <button class="btn btn-primary w-100" type="submit">Search</button>
+  </div>
+</form>
+
+{% if terms %}
+<ul class="list-group">
+  {% for t in terms %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div>
+      <a href="{{ url_for('dict.detail', entry_id=t.id) }}" class="fw-bold">{{ t.term }}</a>
+      {% if t.category %}<span class="badge text-bg-secondary ms-2">{{ t.category }}</span>{% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">No results.</p>
+{% endif %}
+{% endblock %}

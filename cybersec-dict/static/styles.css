@@ -1,0 +1,33 @@
+:root[data-theme='light']{
+	--bg: #ffffff;
+	--fg: #212529;
+	--card: #ffffff;
+}
+:root[data-theme='dark']{
+	--bg: #121212;
+	--fg: #e9ecef;
+	--card: #1e1e1e;
+}
+
+body.bg-body{
+	background-color: var(--bg) !important;
+	color: var(--fg) !important;
+}
+
+.card{
+	background-color: var(--card);
+	color: var(--fg);
+}
+
+.navbar{
+	background-color: #0d6efd !important;
+}
+
+.list-group-item{
+	background-color: var(--card);
+	color: var(--fg);
+}
+
+.badge.text-bg-secondary{
+	background-color: #6c757d !important;
+}
