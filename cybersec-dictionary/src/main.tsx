@@ -11,6 +11,7 @@ import Notes from './pages/Notes.tsx'
 import Quizzes from './pages/Quizzes.tsx'
 import Game from './pages/Game.tsx'
 import Profile from './pages/Profile.tsx'
+import Visualization from './pages/Visualization.tsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: 'notes', element: <Notes /> },
       { path: 'quizzes', element: <Quizzes /> },
       { path: 'game', element: <Game /> },
+      { path: 'visualizations', element: <Visualization /> },
       { path: 'profile', element: <Profile /> },
     ],
   },

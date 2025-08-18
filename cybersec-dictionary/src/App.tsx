@@ -30,6 +30,7 @@ function App() {
     { to: '/books', label: 'Books', icon: BookOpen },
     { to: '/tools', label: 'Tools', icon: Hammer },
     { to: '/notes', label: 'Notes', icon: StickyNote },
+    { to: '/visualizations', label: 'Visuals', icon: HelpCircle },
     { to: '/quizzes', label: 'Quizzes', icon: HelpCircle },
     { to: '/game', label: 'Game', icon: Gamepad2 },
     { to: '/profile', label: 'Profile', icon: User },
