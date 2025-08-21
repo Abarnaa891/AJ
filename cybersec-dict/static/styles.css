@@ -31,3 +31,8 @@ body.bg-body{
 .badge.text-bg-secondary{
 	background-color: #6c757d !important;
 }
+
+[data-theme="dark"] {
+  --bs-body-bg: #121212;
+  --bs-body-color: #e0e0e0;
+}
