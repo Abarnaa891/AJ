@@ -9,6 +9,24 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
 
+
+from flask import Flask
+from extensions import db, login_manager
+
+def create_app():
+    app = Flask(__name__)
+
+    # App config
+    app.config['SECRET_KEY'] = 'super-secret-key'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # 🔑 This is where we bind the extensions
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    return app
+
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key')
