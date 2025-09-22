@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thought-Based Auth (Emoji)</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Thought-Based Authentication</h1>
+      <section class="panel">
+        <h2>Register</h2>
+        <div id="register">
+          <input id="reg-username" placeholder="username" />
+          <div id="emoji-picker" class="grid"></div>
+          <div class="row">
+            <button id="btn-register">Register</button>
+            <span id="register-status" class="status"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Login</h2>
+        <div id="login">
+          <input id="login-username" placeholder="username" />
+          <button id="btn-start">Start Login</button>
+          <div id="challenge" class="hidden">
+            <h3 id="round-title"></h3>
+            <div id="grid" class="grid"></div>
+            <div class="row">
+              <button id="btn-submit">Submit Round</button>
+              <span id="login-status" class="status"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Result</h2>
+        <pre id="result"></pre>
+      </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+  </html>
+
