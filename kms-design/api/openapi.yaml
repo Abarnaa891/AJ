@@ -1,0 +1,414 @@
+openapi: 3.0.3
+info:
+  title: Cloud KMS API
+  version: 1.0.0
+  description: |
+    Google Cloud KMS-like API with REST endpoints corresponding to gRPC operations.
+servers:
+  - url: https://kms.example.com/v1
+security:
+  - bearerAuth: []
+paths:
+  /projects/{project}/locations/{location}/keyRings:
+    post:
+      summary: Create Key Ring
+      operationId: createKeyRing
+      parameters:
+        - $ref: '#/components/parameters/Project'
+        - $ref: '#/components/parameters/Location'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyRingRequest'
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyRing'
+
+  /projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys:
+    post:
+      summary: Create Crypto Key
+      operationId: createCryptoKey
+      parameters:
+        - $ref: '#/components/parameters/Project'
+        - $ref: '#/components/parameters/Location'
+        - $ref: '#/components/parameters/KeyRing'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCryptoKeyRequest'
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoKey'
+
+  /{name}:encrypt:
+    post:
+      summary: Encrypt data
+      operationId: encrypt
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncryptRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptResponse'
+
+  /{name}:decrypt:
+    post:
+      summary: Decrypt data
+      operationId: decrypt
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecryptRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecryptResponse'
+
+  /{name}:sign:
+    post:
+      summary: Sign digest
+      operationId: sign
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignResponse'
+
+  /{name}:verify:
+    post:
+      summary: Verify signature
+      operationId: verify
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyResponse'
+
+  /{name}:macSign:
+    post:
+      summary: Generate MAC
+      operationId: macSign
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MacSignRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MacSignResponse'
+
+  /{name}:macVerify:
+    post:
+      summary: Verify MAC
+      operationId: macVerify
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MacVerifyRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MacVerifyResponse'
+
+  /{name}/publicKey:
+    get:
+      summary: Get public key PEM
+      operationId: getPublicKey
+      parameters:
+        - $ref: '#/components/parameters/ResourceName'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKey'
+
+  /projects/{project}/locations/{location}:generateRandomBytes:
+    post:
+      summary: Generate random bytes
+      operationId: generateRandomBytes
+      parameters:
+        - $ref: '#/components/parameters/Project'
+        - $ref: '#/components/parameters/Location'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRandomBytesRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateRandomBytesResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Project:
+      name: project
+      in: path
+      required: true
+      schema:
+        type: string
+    Location:
+      name: location
+      in: path
+      required: true
+      schema:
+        type: string
+    KeyRing:
+      name: keyRing
+      in: path
+      required: true
+      schema:
+        type: string
+    ResourceName:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    CreateKeyRingRequest:
+      type: object
+      required: [keyRingId]
+      properties:
+        keyRingId:
+          type: string
+    KeyRing:
+      type: object
+      properties:
+        name:
+          type: string
+        createTime:
+          type: string
+          format: date-time
+
+    CreateCryptoKeyRequest:
+      type: object
+      required: [cryptoKeyId, purpose, protectionLevel, algorithm]
+      properties:
+        cryptoKeyId:
+          type: string
+        purpose:
+          type: string
+          enum: [ENCRYPT_DECRYPT, ASYMMETRIC_SIGN, ASYMMETRIC_DECRYPT, MAC]
+        protectionLevel:
+          type: string
+          enum: [SOFTWARE, HSM, EXTERNAL]
+        algorithm:
+          type: string
+        rotationPeriod:
+          type: string
+          description: Duration string like 2592000s
+
+    CryptoKey:
+      type: object
+      properties:
+        name:
+          type: string
+        purpose:
+          type: string
+        protectionLevel:
+          type: string
+        primary:
+          $ref: '#/components/schemas/CryptoKeyVersion'
+
+    CryptoKeyVersion:
+      type: object
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+        algorithm:
+          type: string
+
+    EncryptRequest:
+      type: object
+      required: [plaintext]
+      properties:
+        plaintext:
+          type: string
+          format: byte
+        additionalAuthenticatedData:
+          type: string
+          format: byte
+    EncryptResponse:
+      type: object
+      properties:
+        ciphertext:
+          type: string
+          format: byte
+        name:
+          type: string
+
+    DecryptRequest:
+      type: object
+      required: [ciphertext]
+      properties:
+        ciphertext:
+          type: string
+          format: byte
+        additionalAuthenticatedData:
+          type: string
+          format: byte
+    DecryptResponse:
+      type: object
+      properties:
+        plaintext:
+          type: string
+          format: byte
+
+    SignRequest:
+      type: object
+      required: [digest]
+      properties:
+        digest:
+          type: string
+          format: byte
+    SignResponse:
+      type: object
+      properties:
+        signature:
+          type: string
+          format: byte
+
+    VerifyRequest:
+      type: object
+      required: [digest, signature]
+      properties:
+        digest:
+          type: string
+          format: byte
+        signature:
+          type: string
+          format: byte
+    VerifyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+
+    MacSignRequest:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: string
+          format: byte
+    MacSignResponse:
+      type: object
+      properties:
+        mac:
+          type: string
+          format: byte
+
+    MacVerifyRequest:
+      type: object
+      required: [data, mac]
+      properties:
+        data:
+          type: string
+          format: byte
+        mac:
+          type: string
+          format: byte
+    MacVerifyResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+
+    PublicKey:
+      type: object
+      properties:
+        pem:
+          type: string
+        algorithm:
+          type: string
+
+    GenerateRandomBytesRequest:
+      type: object
+      required: [lengthBytes]
+      properties:
+        lengthBytes:
+          type: integer
+          minimum: 8
+          maximum: 1024
+    GenerateRandomBytesResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          format: byte
